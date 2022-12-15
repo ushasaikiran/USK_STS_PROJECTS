@@ -1,0 +1,18 @@
+spring.datasource.username= root
+
+
+spring.datasource.password= 18b81a04b5
+
+spring.datasource.url= jdbc:mysql://localhost:3306/gradedproject6_db
+
+spring.jpa.hibernate.ddl-auto= update
+
+spring.jpa.show-sql= true
+
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
+
+
+spring.main.allow-circular-references=true
+
+spring.mvc.pathmatch.matching-strategy=ant-path-matcher
+

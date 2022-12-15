@@ -1,0 +1,16 @@
+package com.hcl.gradedsix.repositories;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.hcl.gradedsix.beans.Book;
+
+public interface BookRepository extends JpaRepository<Book, Integer> {
+
+	
+	public Book findBookByBookName(Book bookName);
+	
+	public Book findBookByBookAuthor(Book bookAuthor);
+	
+	public Book findBookByBookPublication(Book bookPublication);
+	
+}

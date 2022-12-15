@@ -1,0 +1,13 @@
+package com.hcl.mappings.services;
+
+import com.hcl.mappings.entities.Address;
+
+public class AddressServiceImp implements IAddressService {
+
+	@Override
+	public Address addAddress(Address address) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

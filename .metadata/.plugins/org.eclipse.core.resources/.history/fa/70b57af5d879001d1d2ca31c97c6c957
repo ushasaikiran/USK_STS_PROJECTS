@@ -1,0 +1,36 @@
+package com.hcl.restapi.restcontroller;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class EmployeeRestControllerTest {
+
+	@Test
+	void testAdd() {
+		
+	}
+
+	@Test
+	void testUpdate() {
+
+	}
+
+	@Test
+	void testGetById() {
+
+	}
+
+	@Test
+	void testDeleteById() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetAll() {
+		
+	}
+
+}

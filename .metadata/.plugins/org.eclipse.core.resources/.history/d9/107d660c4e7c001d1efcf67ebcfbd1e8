@@ -1,0 +1,80 @@
+package com.hcl.gradedproject.services;
+
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
+import org.springframework.stereotype.Service;
+
+import com.hcl.gradedproject.entity.Book;
+import com.hcl.gradedproject.repositories.IBookRepository;
+
+@Service
+public class BookServicesImp implements IBookServices
+{
+	@Autowired
+	IBookRepository bookRepo;
+	
+	@Override
+	public Book addTheBook(Book book)
+	{
+		return bookRepo.save(book);
+	}
+	@Override
+	public Book updateTheBook(Book book)
+	{
+		return bookRepo.save(book);
+		
+	}
+	@Override
+	public String deleteTheBookById(int bookId)
+	{
+		bookRepo.deleteById(bookId);
+		return "Book deleted by admin";
+		
+	}
+	@Override
+	public List<Book> getAllTheBooks()
+	{
+		return bookRepo.findAll();
+		
+	}
+	@Override
+	public Book getTheBookById(int bookId)
+	{
+		return bookRepo.findById(bookId).orElse(null);
+	}
+	@Override
+	public List<Book> getTheBookByAuthorName(String authorName)
+	{
+		return bookRepo.findByAuthorName(authorName);
+	}
+	@Override
+	public Book getTheBookByBookName(String bookName)
+	{
+		return bookRepo.findBookByBookName(bookName);
+	}
+	@Override
+	public Book getTheBookByPublicationName(String publicationName)
+	{
+		return bookRepo.findBookByPublicationName(publicationName);
+	}
+	@Override
+	public List<Book> getTheBookByPriceRange(int start, int end) {
+		
+		return bookRepo.findBookByPriceRange(start,end);
+	}
+	@Override
+	public List<Book> getAllBooksSorted()
+	{
+		List<Order> list=new ArrayList<Order>();
+		list.add(Order.by("price"));
+		return bookRepo.findAll(Sort.by(list));
+	}
+	
+	
+}

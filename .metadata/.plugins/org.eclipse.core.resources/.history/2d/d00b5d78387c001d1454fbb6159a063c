@@ -1,0 +1,167 @@
+package com.hcl.surabi.services;
+
+import java.time.LocalDate;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.hcl.surabi.entities.Admin;
+import com.hcl.surabi.entities.Menu;
+import com.hcl.surabi.entities.MyOrderHistory;
+import com.hcl.surabi.entities.User;
+import com.hcl.surabi.repositories.AdminRepository;
+import com.hcl.surabi.repositories.ItemsMenuRepository;
+import com.hcl.surabi.repositories.OrderHistoryRepository;
+import com.hcl.surabi.repositories.UserRepository;
+
+@Service
+// IMPLEMENTATION CLASS WHICH IMPLEMENTS THE IADMIN SERVICE INTERFACE
+public class AdminServiceImp implements IAdminService{
+
+	Admin admin = new Admin();
+	
+	// CREATING OBJECT FOR USER REPOSITORY USING AUTOWIRED ANNOTATION
+	@Autowired
+	UserRepository userRepository;
+	
+	// CREATING OBJECT FOR ADMIN REPOSITORY USING AUTOWIRED ANNOTATION
+	@Autowired
+	AdminRepository adminRepository;
+	
+	// CREATING OBJECT FOR MENU REPOSITORY USING AUTOWIRED ANNOTATION
+	@Autowired
+	ItemsMenuRepository itemsMenuRepository;
+	
+	// CREATING OBJECT FOR ORDERHISTORY REPOSITORY USING AUTOWIRED ANNOTATION
+	@Autowired
+	OrderHistoryRepository OrderHistoryRepository;
+	
+    // METHOD TO ADD ADMIN
+	public Admin saveadmin(Admin admin) {
+
+		return adminRepository.save(admin);
+	}
+
+	// METHOD TO LOGIN AS AN ADMIN
+	public String LoginAdmin(Admin admin) {
+
+		if (adminRepository.findByAdminuserNameAndAdminpassword(admin.getAdminuserName(),
+				admin.getAdminpassword()) != null) {
+			return "Admin sucessfully logged in";
+		} else {
+			return " admin details";
+		}
+	}
+
+	
+	// METHOD FOR LOGGING OUT AS ADMIN
+	public String LogOutAdmin(Admin admin) {
+
+
+		if (adminRepository.findByAdminuserNameAndAdminpassword(admin.getAdminuserName(),
+				admin.getAdminpassword()) != null) {
+			return "Admin sucessfully log out";
+		} else {
+
+			return "admin details";
+
+		}
+	}
+
+	
+	// METHOD TO ADD USER( ONLY FOR ADMIN)
+	public User saveuser(User newuser) {
+
+		return userRepository.save(newuser);
+
+	}
+
+	// METHOD TO DISPLAY ALL USERS( ONLY FOR ADMIN)
+	public List<User> Displayallusers() {
+
+		return userRepository.findAll();
+	}
+
+	
+	//METHOD TO DELETE USER (ONLY POSSIBLE FOR ADMIN)
+	public void deleteuser(Long id) {
+
+		userRepository.deleteById(id);
+
+	}
+
+	
+	// METHOD TO UPDATE THE USER (ONLY FOR ADMIN)
+	public User Update(Long id, User users) {
+
+		User user = userRepository.findById(id).get();
+		user.setUserName(users.getUserName());
+		user.setPassword(users.getPassword());
+		user.setUser_Address(users.getUser_Address());
+		user.setUser_age(users.getUser_age());
+		return userRepository.save(user);
+	}
+
+	
+	// METHOD TO DISPLAY BILLS WHICH ARE GENERATED TODAY
+	public List<MyOrderHistory> Showallbillstoday(LocalDate ld) {
+
+		return OrderHistoryRepository.findByDate(ld);
+	}
+
+	//METHOD TO DISPLAY USER BILL
+	public List<MyOrderHistory> UserBill(String uname) {
+		return OrderHistoryRepository.findByUserName(uname);
+	}
+
+	
+	// METHOD TO DISPLAY MONTHLY BILLS
+	public List<MyOrderHistory> ShowallbillsMonthly() {
+
+		return OrderHistoryRepository.TotalMonthlyBills();
+	}
+
+	
+	// METHOD TO SHOW TOTAL MONTHLY BILL
+	public String TotalMonthlybill() {
+
+		List<MyOrderHistory> list = OrderHistoryRepository.findAll();
+		int sum = 0;
+
+		for (MyOrderHistory order : list) {
+			sum = sum + order.getTotal_amt();
+		}
+
+		return "Total monthly amount : " + sum;
+	}
+
+	
+	
+	// METHOD TO ADD ITEM (ONLY FOR ADMIN)
+	public Menu saveitem(Menu newitem) {
+		return itemsMenuRepository.save(newitem);
+	}
+
+	// METHOD TO DELETE ITEM (ONLY FOR ADMIN)
+	public void deleteitem(Long id) {
+		itemsMenuRepository.deleteById(id);
+	}
+
+	// METHOD TO DISPLAY ALL ITEMS 
+	public List<Menu> ShowallItems() {
+		return itemsMenuRepository.findAll();
+	}
+    
+	// METHOD TO UPDATE ITEM (ONLY FOR ADMIN)
+	public Menu Update(Long id, Menu menus) {
+
+		Menu menu = itemsMenuRepository.findById(id).get();
+
+		menu.setItemName(menus.getItemName());
+		menu.setPrice(menus.getPrice());
+		return itemsMenuRepository.save(menu);
+	}
+
+}

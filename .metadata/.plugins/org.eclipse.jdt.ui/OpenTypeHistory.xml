@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<typeInfoHistroy>
+    <typeInfo handle="=Graded_Project_RestAPI/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.hcl.gradedrestapi.services{IBookService.java[IBookService" modifiers="513" timestamp="1670420021431"/>
+    <typeInfo handle="=Graded_Project_RestAPI/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.hcl.gradedrestapi.services{IUserService.java[IUserService" modifiers="513" timestamp="1670422350620"/>
+    <typeInfo handle="=HibernateJPAMappings/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.hcl.mappings.services{IStudentService.java[IStudentService" modifiers="513" timestamp="1670657585251"/>
+    <typeInfo handle="=HibernateJPAMappings/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.hcl.mappings.services{IAddressService.java[IAddressService" modifiers="513" timestamp="1670658044786"/>
+    <typeInfo handle="=GradedProjectSix/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.hcl.gradedsix.services{IUserService.java[IUserService" modifiers="513" timestamp="1670831836488"/>
+    <typeInfo handle="=GradedProjectSix/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.hcl.gradedsix.services{IBookService.java[IBookService" modifiers="513" timestamp="1670841443507"/>
+    <typeInfo handle="=HibernateJPAMappings/C:\/Users\/USHA\/.m2\/repository\/org\/springframework\/data\/spring-data-jpa\/2.7.6\/spring-data-jpa-2.7.6.jar=/maven.pomderived=/true=/=/maven.groupId=/org.springframework.data=/=/maven.artifactId=/spring-data-jpa=/=/maven.version=/2.7.6=/=/maven.scope=/compile=/=/maven.pomderived=/true=/&lt;org.springframework.data.jpa.repository(JpaRepository.class[JpaRepository" modifiers="1537" timestamp="1669972364862"/>
+    <typeInfo handle="=MiniProjectUshaSaiKiran/C:\/Users\/USHA\/.m2\/repository\/org\/springframework\/data\/spring-data-jpa\/2.7.5\/spring-data-jpa-2.7.5.jar=/maven.pomderived=/true=/=/maven.groupId=/org.springframework.data=/=/maven.artifactId=/spring-data-jpa=/=/maven.version=/2.7.5=/=/maven.scope=/compile=/=/maven.pomderived=/true=/&lt;org.springframework.data.jpa.repository(JpaRepository.class[JpaRepository" modifiers="1537" timestamp="1671007105134"/>
+</typeInfoHistroy>

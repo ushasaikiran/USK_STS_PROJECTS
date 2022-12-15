@@ -1,0 +1,18 @@
+package com.hcl.mappings.entities;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "address_table")
+public class Address {
+
+	@Id
+	private long addressId;
+	private int flatNo;
+	private String area;
+	private String city;
+	private long zipcode;
+	
+}

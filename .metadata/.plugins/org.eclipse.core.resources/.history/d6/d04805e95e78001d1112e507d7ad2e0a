@@ -1,0 +1,11 @@
+package com.hcl.mappings.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@RequestMapping("api/address")
+public class AddressRestController {
+
+	
+	
+	
+}

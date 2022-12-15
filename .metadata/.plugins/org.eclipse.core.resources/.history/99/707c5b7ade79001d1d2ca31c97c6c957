@@ -1,0 +1,68 @@
+package com.hcl.restapi.restcontroller;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+
+import com.hcl.restapi.entity.Employee;
+
+@SpringBootTest
+class EmployeeRestControllerTest {
+
+	@Autowired
+	RestTemplate restTemplate;
+	
+	public final String BaseURL = "http://localhost:8080/api/employees";
+	
+	@Test
+	void testAdd() {
+		
+		Employee emp = new Employee();
+		emp.setEid(102);
+		emp.setEname("pravallika");
+		emp.setSalary(45000.6);
+		
+	Employee emp1 = restTemplate.postForObject( BaseURL + "/add",emp, Employee.class);
+	
+	assertEquals(102, emp1.getEid());
+	
+	
+	}
+
+	@Test
+	void testUpdate() {
+		
+		Employee emp = new Employee();
+		emp.setEid(90);
+		emp.setEname("sai");
+		emp.setSalary(45000.6);
+		
+		restTemplate.put(BaseURL + "/update",emp);
+		
+	ResponseEntity<Employee> response = restTemplate.getForEntity(BaseURL + "/get/90",Employee.class);
+		
+		Employee emp1 = response.getBody();
+		
+		assertEquals(45000.6,emp1.getSalary());
+	}
+
+	@Test
+	void testGetById() {
+
+	}
+
+	@Test
+	void testDeleteById() {
+
+	}
+
+	@Test
+	void testGetAll() {
+		
+	}
+
+}

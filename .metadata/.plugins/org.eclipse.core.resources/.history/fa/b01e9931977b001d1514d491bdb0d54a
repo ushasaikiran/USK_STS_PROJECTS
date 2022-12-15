@@ -1,0 +1,12 @@
+package com.hcl.surabi.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.hcl.surabi.entities.User;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+
+
+	// USER DEFINED METHOD TO FIND USER BY NAME AND PASSWORD
+	public User findByUserNameAndPassword(String username,String password);
+}

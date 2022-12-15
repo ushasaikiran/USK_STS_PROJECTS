@@ -1,0 +1,27 @@
+package com.hcl.restapi.dao;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Repository;
+
+import com.hcl.restapi.entity.Employee;
+
+@Repository
+public class EmployeeDao {
+
+	private Map<Long,Employee> DB = new HashMap<>();
+	
+	public List<Employee> getEmployeeList(){
+		List<Employee> list = new ArrayList<>();
+		if(list.isEmpty()) {
+			list.addAll(DB.values());
+		}
+		return List<Employee>;
+		
+	}
+	
+	
+}

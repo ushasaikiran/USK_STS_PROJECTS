@@ -1,0 +1,5 @@
+package com.hcl.mappings.services;
+
+public interface IStudentService {
+
+}

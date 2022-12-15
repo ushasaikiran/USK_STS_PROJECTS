@@ -1,0 +1,100 @@
+package com.hcl.gradedproject.restcontroller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.hcl.gradedproject.entity.Admin;
+import com.hcl.gradedproject.entity.Book;
+import com.hcl.gradedproject.services.AdminServiceImp;
+import com.hcl.gradedproject.services.BookServicesImp;
+
+@RequestMapping("/api/admin")
+@RestController
+public class AdminRestController
+{
+	@Autowired
+	AdminServiceImp service;
+	
+	@Autowired
+	BookServicesImp bookService;
+	
+	 @PostMapping("/registerAdmin")
+		public ResponseEntity<String> register(@RequestBody Admin admin){
+			return service.registerAdmin(admin);	
+		}	
+		@GetMapping("/adminlogin/{adminName}/{adminPassword}")
+		public ResponseEntity<String> login(@PathVariable String adminName,@PathVariable String adminPassword,HttpSession session) 
+		{
+			Admin admin =  service.getAdminByAdminName(adminName);
+			ResponseEntity<String> response = null;
+			if(admin.getAdminName().equals(adminName)&&(admin.getAdminPassword().equals(adminPassword))) 
+			{	
+				session.setAttribute("adminName", adminName);
+				session.setAttribute("adminPassword",adminPassword);		
+				response = new ResponseEntity<String>("Admin Login Success!",HttpStatus.OK);
+			}
+			else {
+				
+				response = new ResponseEntity<String>("Admin Login Failed!", HttpStatus.BAD_REQUEST);
+			}
+			return response;
+		}
+		@GetMapping("/logout")
+		public String logout(HttpSession session) {
+			String msg = "Still Login";
+			if(session.getAttribute("adminName")==null){
+				msg = " Admin Logout Success";	
+			}
+			return msg;
+			
+		}
+		
+		@PostMapping("/addBook")
+		public Book addBook(@RequestBody Book book)
+		{
+			return bookService.addBook(book);
+		}
+		
+		@PutMapping("/updateBook")
+		public Book updateBook(@RequestBody Book book)
+		{
+			return bookService.updateBook(book);
+		}
+		
+		@DeleteMapping("/deleteBook/{bookId}")
+		public String deleteBookById(@PathVariable int bookId)
+		{
+			return bookService.deleteBookById(bookId);
+		}
+		
+		@GetMapping("/getAllBooks")
+		public List<Book> getAllBooks()
+		{
+			return bookService.getAllBooks();
+		}
+		
+		@GetMapping("/getBookById/{bookId}")
+		public Book getBookById(@PathVariable int bookId)
+		{
+			return bookService.getBookById(bookId);
+		}
+		
+		@GetMapping("/getBookByAuthorName/{authorName}")
+		public List<Book> getBookByAuthorName(@PathVariable String authorName)
+		{
+			return bookService.getBookByAuthorName(authorName);
+		}
+}

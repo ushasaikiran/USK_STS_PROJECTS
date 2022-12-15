@@ -1,0 +1,32 @@
+package com.hcl.restapi.service;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+
+@SpringBootTest
+class EmployeeServiceImpTest {
+
+	@Test
+	void testAddEmployee() {
+		
+	}
+
+	@Test
+	void testUpdateEmployee() {
+	
+	}
+
+	@Test
+	void testDeleteEmployeeById() {
+
+	}
+
+	@Test
+	void testGetEmployeeByName() {
+		
+	}
+
+}

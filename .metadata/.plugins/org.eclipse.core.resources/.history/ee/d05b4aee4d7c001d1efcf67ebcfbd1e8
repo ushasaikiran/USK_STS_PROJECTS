@@ -1,0 +1,21 @@
+package com.hcl.gradedproject.services;
+
+import java.util.List;
+
+
+import com.hcl.gradedproject.entity.Book;
+
+
+public interface IBookServices 
+{
+	public Book addTheBook(Book book);
+	public Book updateTheBook(Book book);
+	public String deleteTheBookById(int bookId);
+	public List<Book> getAllTheBooks();
+	public Book getTheBookById(int bookId);
+	public List<Book> getTheBookByAuthorName(String authorName);
+	public Book getTheBookByBookName(String bookName);
+	public Book getTheBookByPublicationName(String publicationName);
+	public List<Book> getTheBookByPriceRange(int start,int end);
+	public List<Book>  getAllBooksSorted();
+}

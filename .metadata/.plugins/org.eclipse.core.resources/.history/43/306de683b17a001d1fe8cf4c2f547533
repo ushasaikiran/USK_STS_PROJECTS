@@ -1,0 +1,47 @@
+package com.hcl.gradedsix.restcontroller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.web.bind.annotation.RestController;
+
+import com.hcl.gradedsix.beans.Book;
+import com.hcl.gradedsix.services.IBookService;
+
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
+@RestController
+@RequestMapping("/api/adminbook")
+public class AdminBookRestController {
+
+	@Autowired
+	IBookService service;
+
+	
+	@PostMapping("/add")
+	public Book addBook(@RequestBody Book book) {
+
+		return service.addBook(book);
+
+	}
+    @PutMapping("/update")
+	public Book updateBook(@RequestBody Book book) {
+		return service.updateBook(book);
+	}
+
+    @DeleteMapping("/delete/{bookId}")
+	public String deleteById(@PathVariable int bookId) {
+
+		return service.deleteBookById(bookId);
+	}
+  
+    @GetMapping("/getbyid/{bookId}")
+	public Book getById(@PathVariable int bookId) {
+		return service.getBookById(bookId);
+	}
+}

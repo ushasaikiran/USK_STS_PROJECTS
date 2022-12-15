@@ -1,0 +1,22 @@
+package com.hcl.restapi;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.hcl.restapi.respository.EmployeeRepository;
+
+@SpringBootTest
+public class RepositoryTesting {
+
+	@Autowired
+	EmployeeRepository repo;
+	
+	
+	@Test
+	public void addTest() {
+		
+	}
+	
+	
+}

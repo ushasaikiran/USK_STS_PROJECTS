@@ -1,0 +1,5 @@
+package com.hcl.surabi.controller;
+
+public class UserRestController {
+
+}

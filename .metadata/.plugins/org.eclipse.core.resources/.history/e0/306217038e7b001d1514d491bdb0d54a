@@ -1,0 +1,5 @@
+package com.hcl.surabi.services;
+
+public class AdminService {
+
+}

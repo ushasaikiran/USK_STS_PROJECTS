@@ -1,0 +1,29 @@
+package com.hcl.surabi.services;
+
+import java.util.List;
+
+import com.hcl.surabi.entities.Menu;
+import com.hcl.surabi.entities.ItemOrderHistory;
+import com.hcl.surabi.entities.User;
+
+
+//USER INTERFACE
+public interface IUserService {
+
+	public User saveuser(User newuser);
+
+	public String LoginUser(User user);// LOGIN AS USER
+
+	public String LogoutUser(User user); //lOGOUT
+
+	public List<Menu> Showall();// DISPLAY ALL ITEMS FOR THE USER
+
+	public String SearchItem(ItemOrderHistory order_history); // ORDER HISTORY
+
+	public List<ItemOrderHistory> UserOrders(String userName); //USERS ORDER
+
+	public List<Menu> addToStore(String itemname);// ADDING ITEMS TO THE STORE
+
+	public String FinalBill(String uname);// FINAL BILL
+
+}

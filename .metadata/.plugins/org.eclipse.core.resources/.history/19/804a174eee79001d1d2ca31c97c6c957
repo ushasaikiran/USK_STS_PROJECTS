@@ -1,0 +1,15 @@
+package com.hcl.restapi.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.hcl.restapi.dao.EmployeeDao;
+
+@Service
+public class EmployeemanagerService {
+
+	@Autowired
+	EmployeeDao dao;
+	
+	
+}

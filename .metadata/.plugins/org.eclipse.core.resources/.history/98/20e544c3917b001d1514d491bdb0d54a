@@ -1,0 +1,68 @@
+package com.hcl.surabi.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.hcl.surabi.entities.Menu;
+import com.hcl.surabi.entities.MyOrderHistory;
+import com.hcl.surabi.entities.User;
+import com.hcl.surabi.services.UserService;
+
+@RestController
+@RequestMapping("/users")
+
+public class UserRestController {
+	@Autowired
+	UserService userService;
+
+
+	@PostMapping("/register")
+	public String registerUser(@RequestBody User newuser) {
+		userService.saveuser(newuser);
+		return "User Registered Successfully";
+	}
+
+	@PostMapping("/login")
+	public String userLogin(@RequestBody User user) {
+		return userService.LoginUser(user);
+	}
+
+	@PostMapping("/logout")
+	public String userLogOut(@RequestBody User user) {
+		return userService.LogoutUser(user);
+	}
+
+	@GetMapping("/displaymenu")
+	public List<Menu> Showall() {
+		return userService.Showall();
+	}
+
+	@PostMapping("/addtothestore/{itemname}")
+	public List<Menu> addToStore(@PathVariable(value = "itemname") String itemname) {
+		return userService.addToStore(itemname);
+	}
+
+	
+	@PostMapping("/order")
+	public String SearchItem(@RequestBody MyOrderHistory order_history) {
+		return userService.SearchItem(order_history);
+	}
+
+	@GetMapping("/orderhistory/{username}")
+	public List<MyOrderHistory> UserOrders(@PathVariable(value = "username") String username) {
+		return userService.UserOrders(username);
+	}
+
+	@GetMapping("/finalbill/{username}")
+	public String FinalBill(@PathVariable(value = "username") String username) {
+		return userService.FinalBill(username);
+	}
+
+}

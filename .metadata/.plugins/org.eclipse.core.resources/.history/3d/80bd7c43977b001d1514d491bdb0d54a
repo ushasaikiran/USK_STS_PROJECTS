@@ -1,0 +1,134 @@
+package com.hcl.surabi.services;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.hcl.surabi.entities.Admin;
+import com.hcl.surabi.entities.Menu;
+import com.hcl.surabi.entities.MyOrderHistory;
+import com.hcl.surabi.entities.User;
+import com.hcl.surabi.repository.AdminRepository;
+import com.hcl.surabi.repository.MenuRepository;
+import com.hcl.surabi.repository.OrderHistoryRepository;
+import com.hcl.surabi.repository.UserRepository;
+
+@Service
+public class AdminServiceImp implements IAdminService{
+
+	Admin admin = new Admin();
+	@Autowired
+	UserRepository userRepository;
+	@Autowired
+	AdminRepository adminRepository;
+	@Autowired
+	MenuRepository menuRepository;
+	@Autowired
+	OrderHistoryRepository OrderHistoryRepository;
+
+	public Admin saveadmin(Admin admin) {
+
+		return adminRepository.save(admin);
+	}
+
+	public String LoginAdmin(Admin admin) {
+
+		if (adminRepository.findByAdminuserNameAndAdminpassword(admin.getAdminuserName(),
+				admin.getAdminpassword()) != null) {
+			return "Admin sucessfully logged in";
+		} else {
+			return " admin details";
+		}
+	}
+
+	public String LogOutAdmin(Admin admin) {
+
+
+		if (adminRepository.findByAdminuserNameAndAdminpassword(admin.getAdminuserName(),
+				admin.getAdminpassword()) != null) {
+			return "Admin sucessfully log out";
+		} else {
+
+			return "admin details";
+
+		}
+	}
+
+	public User saveuser(User newuser) {
+
+		return userRepository.save(newuser);
+
+	}
+
+	public List<User> Displayallusers() {
+
+		return userRepository.findAll();
+	}
+
+	public void deleteuser(Long id) {
+
+		userRepository.deleteById(id);
+
+	}
+
+	public User Update(Long id, User users) {
+
+		User user = userRepository.findById(id).get();
+		user.setUserName(users.getUserName());
+		user.setPassword(users.getPassword());
+		user.setUser_Address(users.getUser_Address());
+		user.setUser_age(users.getUser_age());
+		return userRepository.save(user);
+	}
+
+	public List<MyOrderHistory> Showallbillstoday(LocalDate ld) {
+
+		return OrderHistoryRepository.findByDate(ld);
+	}
+
+	public List<MyOrderHistory> UserBill(String uname) {
+		return OrderHistoryRepository.findByUserName(uname);
+	}
+
+	public List<MyOrderHistory> ShowallbillsMonthly() {
+
+		return OrderHistoryRepository.TotalMonthlyBills();
+	}
+
+	public String TotalMonthlybill() {
+
+		List<MyOrderHistory> list = OrderHistoryRepository.findAll();
+		int sum = 0;
+
+		for (MyOrderHistory order : list) {
+			sum = sum + order.getTotal_amt();
+		}
+
+		return "Total monthly amount : " + sum;
+	}
+
+	
+	public Menu saveitem(Menu newitem) {
+		return menuRepository.save(newitem);
+	}
+
+	public void deleteitem(Long id) {
+		menuRepository.deleteById(id);
+	}
+
+	public List<Menu> ShowallItems() {
+		return menuRepository.findAll();
+	}
+
+	public Menu Update(Long id, Menu menus) {
+
+		Menu menu = menuRepository.findById(id).get();
+
+		menu.setItemName(menus.getItemName());
+		menu.setPrice(menus.getPrice());
+		return menuRepository.save(menu);
+	}
+
+}

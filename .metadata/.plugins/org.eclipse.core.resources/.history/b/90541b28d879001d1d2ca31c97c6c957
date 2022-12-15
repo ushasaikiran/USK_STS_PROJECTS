@@ -1,0 +1,65 @@
+package com.hcl.restapi.service;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.hcl.restapi.entity.Employee;
+
+
+@SpringBootTest
+class EmployeeServiceImpTest {
+
+	@Autowired
+	IEmployeeService service;
+	
+	
+	@Test
+	void testAddEmployee() {
+	
+		Employee emp = new Employee();
+		
+		emp.setEid(111);
+		emp.setEname("usha");
+		emp.setSalary(9000);
+
+		Employee emp1 = service.addEmployee(emp);
+		assertEquals(9000,emp1.getSalary());
+	}
+	
+
+	@Test
+	void testUpdateEmployee() {
+	
+
+		Employee emp = new Employee();
+		
+		emp.setEid(111);
+		emp.setEname("kiran");
+		emp.setSalary(8000.5);
+
+		Employee emp1 = service.updateEmployee(emp);
+		assertNotNull(emp1);
+		
+	}
+
+	@Test
+	void testDeleteEmployeeById() {
+
+
+		
+		service.deleteEmployeeById(90);
+		
+		Employee emp = service.getEmployeeByName("tom")
+		
+	}
+
+	@Test
+	void testGetEmployeeByName() {
+		
+	}
+
+}

@@ -1,0 +1,44 @@
+package com.hcl.surabi.services;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import com.hcl.surabi.entities.Admin;
+import com.hcl.surabi.entities.Menu;
+import com.hcl.surabi.entities.ItemOrderHistory;
+import com.hcl.surabi.entities.User;
+
+
+//ADMIN INTERFACE 
+public interface IAdminService {
+
+	public Admin saveadmin(Admin admin); // ADD ADMIN
+
+	public String LoginAdmin(Admin admin); // LOGIN  AS ADMIN
+
+	public String LogOutAdmin(Admin admin);// LOGOUT AS ADMIN
+
+	public User saveuser(User newuser);// ADD USER
+
+	public List<User> Displayallusers();//DISPLAY USERS
+
+	public void deleteuser(Long id); //DELETE USER
+
+	public User Update(Long id, User users); // UPDATE USER
+
+	public List<ItemOrderHistory> Showallbillstoday(LocalDate ld);// ALL BILLS
+
+	public List<ItemOrderHistory> UserBill(String uname);//USER BILL
+
+	public List<ItemOrderHistory> ShowallbillsMonthly();//MONTHLY BILLS
+
+	public String TotalMonthlybill();// TOTAL MONTHLY BILL
+
+	public Menu saveitem(Menu newitem); // ADD ITEM;
+
+	public void deleteitem(Long id); //UPDATE ITEM
+
+	public List<Menu> ShowallItems();// DISPLAY ALL ITEMS
+
+	public Menu Update(Long id, Menu menus);// UPDATE ITEM
+}

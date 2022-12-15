@@ -1,0 +1,29 @@
+package com.hcl.restapi.service;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class EmployeeServiceImpTest {
+
+	@Test
+	void testAddEmployee() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testUpdateEmployee() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testDeleteEmployeeById() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetEmployeeByName() {
+		fail("Not yet implemented");
+	}
+
+}

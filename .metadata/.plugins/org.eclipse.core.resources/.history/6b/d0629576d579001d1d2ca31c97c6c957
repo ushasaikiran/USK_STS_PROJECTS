@@ -1,0 +1,44 @@
+package com.hcl.restapi.service;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.hcl.restapi.entity.Employee;
+
+
+@SpringBootTest
+class EmployeeServiceImpTest {
+
+	@Autowired
+	IEmployeeService service;
+	
+	
+	@Test
+	void testAddEmployee() {
+	
+		Employee emp = new Employee();
+		
+		emp.setEid(111);
+		
+		
+		service.addEmployee(employee);
+	}
+	
+
+	@Test
+	void testUpdateEmployee() {
+	
+	}
+
+	@Test
+	void testDeleteEmployeeById() {
+
+	}
+
+	@Test
+	void testGetEmployeeByName() {
+		
+	}
+
+}

@@ -1,0 +1,23 @@
+package com.hcl.mappings.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.hcl.mappings.entities.Address;
+import com.hcl.mappings.services.IAddressService;
+
+@RequestMapping("api/address")
+public class AddressRestController {
+
+	
+	@Autowired
+	IAddressService service;
+	
+	public Address add(Address address) {
+		
+		
+		
+	}
+	
+	
+}

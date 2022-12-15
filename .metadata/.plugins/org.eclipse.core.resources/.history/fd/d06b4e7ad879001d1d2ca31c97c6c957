@@ -1,0 +1,34 @@
+package com.hcl.restapi.restcontroller;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class EmployeeRestControllerTest {
+
+	@Test
+	void testAdd() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testUpdate() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetById() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testDeleteById() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetAll() {
+		fail("Not yet implemented");
+	}
+
+}

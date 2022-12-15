@@ -1,0 +1,38 @@
+package com.hcl.restapi;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.hcl.restapi.entity.Employee;
+import com.hcl.restapi.respository.EmployeeRepository;
+
+import lombok.extern.slf4j.Slf4j;
+
+@SpringBootTest
+@Slf4j
+public class RepositoryTesting {
+
+	@Autowired
+	EmployeeRepository repo;
+	
+	
+	@Test
+	public void addTest() {
+		
+		Employee emp = new Employee();
+		
+		emp.setEid(90);
+		emp.setEname("tom");
+		emp.setSalary(7000.8);
+		
+		Employee actual = 	repo.save(null);
+		Log.info("Employee obj added");
+		assertNotNull(actual);
+		
+	}
+	
+	
+}

@@ -1,0 +1,115 @@
+package com.hcl.surabi.controller;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.hcl.surabi.entities.Admin;
+import com.hcl.surabi.entities.Menu;
+import com.hcl.surabi.entities.MyOrderHistory;
+import com.hcl.surabi.entities.User;
+import com.hcl.surabi.services.AdminServiceImp;
+
+@RestController
+@RequestMapping("/admin") // BASE URL 
+// REST CONTROLLER CLASS
+public class AdminRestController {
+
+	
+	// CREATING OBJECT FOR ADMINSERVICEIMP USING AUTOWIRED ANNOTATION
+	@Autowired
+	AdminServiceImp adminServiceImp;
+
+
+	@PostMapping("/SIGNIN") 
+	public String registeradmin(@RequestBody Admin admin) {
+		adminServiceImp.saveadmin(admin);
+		return "Admin Registered Successfully";
+	}
+
+	@PostMapping("/ADMINLOGIN")
+	public String adminLogin(@RequestBody Admin admin) {
+		return adminServiceImp.LoginAdmin(admin);
+	}
+
+	@PostMapping("/ADMINLOGOUT")
+	public String adminLogOut(@RequestBody Admin admin) {
+		return adminServiceImp.LogOutAdmin(admin);
+	}
+
+	@PostMapping("/ADDUSER")
+	public String registerUser(@RequestBody User newuser) {
+		adminServiceImp.saveuser(newuser);
+		return "THANK YOU FOR YOUR REGISTRATION! YOU REGISTRATION IS SUCCESSFULL";
+	}
+
+	@GetMapping("/DISPLAYALLTHEUSERS")
+	public List<User> Displayallusers() {
+		return adminServiceImp.Displayallusers();
+	}
+
+	@DeleteMapping("/DELETETHEUSER/{uid}")
+	private String deleteuser(@PathVariable(value = "uid") Long id) {
+		adminServiceImp.deleteuser(id);
+		return "!!USER IS DELETED!!";
+	}
+
+	@PutMapping("/UPDATETHEUSER/{userid}")
+	private User update(@PathVariable(value = "userid") Long id, @RequestBody User user) {
+		return adminServiceImp.Update(id, user);
+
+	}
+
+	@GetMapping("/TODAY'SBILLS")
+	public List<MyOrderHistory> Showallbillstoday() {
+		LocalDate ld = LocalDate.now();
+		return adminServiceImp.Showallbillstoday(ld);
+	}
+
+	@GetMapping("/USERBILL/{username}")
+	public List<MyOrderHistory> UserBill(@PathVariable(value = "username") String uname) {
+		return adminServiceImp.UserBill(uname);
+	}
+
+	@GetMapping("/MONTHLYBILLS")
+	public List<MyOrderHistory> ShowallbillsMonthly() {
+		return adminServiceImp.ShowallbillsMonthly();
+	}
+
+	@GetMapping("/TOTAL-MONTHLY-BILL")
+	public String TotalMonthlybill() {
+		return adminServiceImp.TotalMonthlybill();
+	}
+
+	@PostMapping("/additem")
+	public String registerItem(@RequestBody Menu newitem) {
+		adminServiceImp.saveitem(newitem);
+		return "Item Inserted Successfully";
+	}
+
+	@GetMapping("/showitems")
+	public List<Menu> ShowallItems() {
+		return adminServiceImp.ShowallItems();
+	}
+
+	@DeleteMapping("/deleteitem/{itemid}")
+	private String deleteitem(@PathVariable(value = "itemid") Long id) {
+		adminServiceImp.deleteitem(id);
+		return "!!ITEM IS DELETED!!";
+	}
+
+	@PutMapping("/update/{itemid}")
+	private Menu updateItem(@PathVariable(value = "itemid") Long id, @RequestBody Menu menu) {
+		return adminServiceImp.Update(id, menu);
+	}
+
+}

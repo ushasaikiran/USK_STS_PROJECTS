@@ -1,0 +1,5 @@
+package com.hcl.hibernatemappings.entities;
+
+public class Student {
+
+}

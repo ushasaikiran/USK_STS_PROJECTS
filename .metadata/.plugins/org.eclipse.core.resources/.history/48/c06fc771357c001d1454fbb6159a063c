@@ -1,0 +1,62 @@
+package com.hcl.surabi.entities;
+import java.time.LocalDate;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+@Data
+@Entity
+@Table(name="orderhistory")
+public class MyOrderHistory {
+	
+	    @Id // @ Id ANNOTATION IS USED TO MAKE IT AS PRIMARY KEY(NOT TO ALLOW DUPLICATES)
+	    @GeneratedValue(strategy = GenerationType.IDENTITY) // HERE ID IS AUTO GENERATED
+        private long order_id;    
+        private String userName;
+        private String itemName;
+        private int total_amt;
+        private int plates;
+        
+        @JsonFormat(pattern="yyyy-MM-dd")
+        private LocalDate date;
+
+       public long getOrder_id() {
+            return order_id;
+        }
+        public void setOrder_id(long order_id) {
+            this.order_id = order_id;
+        }
+        public String getUserName() {
+            return userName;
+        }
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
+        public String getItemName() {
+            return itemName;
+        }
+        public void setItemName(String itemName) {
+            this.itemName = itemName;
+        }
+        public int getTotal_amt() {
+            return total_amt;
+        }
+        public void setTotal_amt(int total_amt) {
+            this.total_amt = total_amt;
+        }
+        public LocalDate getDate() {
+            return date;
+        }
+        public void setDate(LocalDate date) {
+            this.date = date;
+        }
+        public int getPlates() {
+            return plates;
+        }
+        public void setPlates(int plates) {
+            this.plates = plates;
+        }
+    }

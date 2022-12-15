@@ -1,0 +1,8 @@
+package com.hcl.gradedsix.services;
+
+public interface IUserBookService {
+
+	
+	
+	
+}

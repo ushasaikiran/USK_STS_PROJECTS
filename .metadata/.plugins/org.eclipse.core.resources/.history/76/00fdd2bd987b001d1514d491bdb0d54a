@@ -1,0 +1,118 @@
+package com.hcl.surabi.services;
+
+import java.time.LocalDate;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.hcl.surabi.entities.Menu;
+import com.hcl.surabi.entities.MyOrderHistory;
+import com.hcl.surabi.entities.User;
+import com.hcl.surabi.repository.MenuRepository;
+import com.hcl.surabi.repository.OrderHistoryRepository;
+import com.hcl.surabi.repository.UserRepository;
+
+@Service
+
+//IMPLEMENTATION CLASS WHICH IMPLEMENTS THE IUSER SERVICE INTERFACE
+public class UserServiceImp {
+	
+	// CREATING OBJECT FOR USER REPOSITORY USING AUTOWIRED ANNOTATION
+	@Autowired
+	UserRepository userRepository;
+    
+	// CREATING OBJECT FOR MENU REPOSITORY USING AUTOWIRED ANNOTATION
+	@Autowired
+	MenuRepository menuRepository;
+
+	// CREATING OBJECT FOR ORDERHISTORY REPOSITORY USING AUTOWIRED ANNOTATION
+	@Autowired
+	OrderHistoryRepository OrderHistoryRepository;
+
+	List<Menu> stores = new ArrayList<Menu>();
+	LocalDate ld = LocalDate.now();
+
+	public User saveuser(User newuser) {
+
+		return userRepository.save(newuser);
+
+	}
+
+	public String LoginUser(User user) {
+
+		if (userRepository.findByUserNameAndPassword(user.getUserName(), user.getPassword()) != null) {
+
+			System.out.println("Username is " + user.getUserName());
+			return "User sucessfully logged in";
+		} else {
+
+			return "User not found";
+
+		}
+	}
+
+	public String LogoutUser(User user) {
+
+		if (userRepository.findByUserNameAndPassword(user.getUserName(), user.getPassword()) != null) {
+			return "User sucessfully log out";
+		} else {
+
+			return "Incorrect user details";
+
+		}
+	}
+
+	public List<Menu> Showall() {
+		return menuRepository.findAll();
+	}
+
+	// taking order from user
+	public String SearchItem(MyOrderHistory order_history) {
+		int sum = 0;
+		Menu menu = menuRepository.findByItemName(order_history.getItemName());
+
+		MyOrderHistory history = new MyOrderHistory();
+		int price = menu.getPrice();
+		sum = price * order_history.getPlates();
+		history.setItemName(order_history.getItemName());
+		history.setTotal_amt(sum);
+		history.setUserName(order_history.getUserName());
+		history.setPlates(order_history.getPlates());
+		history.setDate(ld);
+
+		OrderHistoryRepository.save(history);
+		return "total amount: " + sum;
+	}
+
+	public List<MyOrderHistory> UserOrders(String userName) {
+		return OrderHistoryRepository.findByUserName(userName);
+	}
+
+
+	public List<Menu> addToStore(String itemname) {
+
+		Menu store = menuRepository.findByItemName(itemname);
+
+		stores.add(store);
+
+		return stores;
+	}
+
+
+	public String FinalBill(String uname) {
+
+		List<MyOrderHistory> history = OrderHistoryRepository.findByUserName(uname);
+		LocalDate ld = LocalDate.now();
+		int sum = 0;
+		for (MyOrderHistory order : history) {
+			if (ld.equals(order.getDate())) {
+				sum = sum + order.getTotal_amt();
+			}
+		}
+		return "final Bill: " + sum;
+	}
+
+}
